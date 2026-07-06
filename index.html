@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Юля Велицкая — Английский язык, Тель-Авив</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style type="text/tailwindcss">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .hero-bg {
+      /* Тёплый графит (Stone-900 → Stone-700) вместо холодного Navy.
+         Причина: сепия-тона фото Юли (охра, беж, тёплая кожа) конфликтовали
+         по цветовой температуре с холодным синим — тёплый серый гармонирует. */
+      background: linear-gradient(135deg, #1c1917 0%, #44403c 100%);
+    }
+    
+    .testimonial-card {
+      border-left: 4px solid #FB923C;
+    }
+    
+    .btn-primary {
+      @apply px-4 sm:px-6 py-4 sm:py-3 bg-stone-800 text-white rounded-lg font-semibold hover:bg-stone-700 transition text-sm sm:text-base;
+    }
+    
+    .btn-secondary {
+      @apply px-4 sm:px-6 py-4 sm:py-3 border-2 border-stone-800 text-stone-800 rounded-lg font-semibold hover:bg-stone-100 transition text-sm sm:text-base;
+    }
+    
+    /* Отдельный класс для "outline"-кнопок на ТЁМНОМ фоне (например, hero-секция).
+       btn-secondary использует тёмно-синий текст и рамку — на тёмном фоне это
+       превращается в тёмное-на-тёмном (контраст почти нулевой). Здесь — 
+       белая рамка и текст по умолчанию, а на hover — инверсия в белый фон
+       с тёмно-синим текстом (тот же принцип, что у btn-secondary, но зеркально). */
+    .btn-outline-light {
+      @apply px-4 sm:px-6 py-4 sm:py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-stone-800 transition text-sm sm:text-base;
+    }
+    
+    .btn-whatsapp {
+      @apply px-4 sm:px-6 py-4 sm:py-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition flex items-center gap-2 text-sm sm:text-base;
+    }
+  </style>
+</head>
+<body class="bg-slate-50">
+
+<!-- ==================== 1. HERO SECTION (MOBILE-FIRST) ==================== -->
+<section class="hero-bg text-white">
+  <div class="max-w-7xl mx-auto px-4 py-12 sm:py-16 md:py-28">
+    <!-- FLEX COLUMN на мобильных, GRID на десктопах -->
+    <div class="flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+      
+      <!-- ФОТО (первым на мобильных благодаря flex flex-col, справа на десктопах благодаря md:order-last) -->
+      <div class="flex md:order-last items-center justify-center w-full md:w-auto">
+        <div class="relative w-56 sm:w-72 md:w-96 h-72 sm:h-80 md:h-96 overflow-hidden rounded-2xl shadow-2xl flex-shrink-0">
+          <img 
+            src="./JuliaEnglish.JPG" 
+            alt="Юля Велицкая, преподаватель английского языка в Тель-Авиве с 15+ годами опыта"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+      
+      <!-- ТЕКСТ И CTA (вторым на мобильных, слева на десктопах) -->
+      <div>
+        <h1 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight mb-3 sm:mb-6">
+          Заговорите по-английски за 3–6 месяцев
+        </h1>
+        <p class="text-sm sm:text-lg md:text-xl text-gray-200 mb-4 sm:mb-8 leading-relaxed">
+          Индивидуальные уроки для школьников и взрослых в Тель-Авиве и онлайн. Без зубрёжки — только результат.
+        </p>
+        
+        <!-- Social Proof (адаптивная раскладка) -->
+        <div class="grid grid-cols-3 gap-2 sm:gap-6 mb-6 sm:mb-10 text-xs sm:text-sm text-gray-300">
+          <div>
+            <strong class="text-white text-xs sm:text-base block">15+</strong>
+            <span class="text-xs">лет опыта</span>
+          </div>
+          <div>
+            <strong class="text-white text-xs sm:text-base block">200+</strong>
+            <span class="text-xs">учеников</span>
+          </div>
+          <div>
+            <strong class="text-white text-xs sm:text-base block">A0 → C2</strong>
+            <span class="text-xs">все уровни</span>
+          </div>
+        </div>
+        
+        <!-- CTAs (вертикально на мобильных, горизонтально на sm+) -->
+        <div class="flex flex-col sm:flex-row gap-2 sm:gap-4">
+          <a href="https://wa.me/972533218905?text=Привет%2C%20Юля!%20Хочу%20начать%20уроки%20английского." target="_blank" rel="noopener" class="btn-whatsapp justify-center sm:justify-start w-full sm:w-auto">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.413-2.393-1.476-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.255.949 9.83 9.83 0 00-3.12 2.51A9.83 9.83 0 002.5 12c0 5.467 4.471 9.922 9.896 9.922 1.54 0 3.006-.28 4.38-.823l.031-.015c5.385-2.117 8.979-7.534 8.979-13.084 0-5.467-4.471-9.922-9.896-9.922z"/></svg>
+            Написать в WhatsApp
+          </a>
+          <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})" class="btn-outline-light justify-center w-full sm:w-auto">
+            Узнать больше
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2. WHY CHOOSE ME ==================== -->
+<section class="py-12 sm:py-16 md:py-20 px-4">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 text-center mb-3 sm:mb-4">
+      Почему ученики и родители выбирают меня
+    </h2>
+    <p class="text-center text-gray-600 text-base sm:text-lg mb-12 sm:mb-16 max-w-2xl mx-auto">
+      Мой подход основан на 15 годах опыта, специальном образовании и глубокой любви к английскому языку.
+    </p>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- Benefit 1 -->
+      <div class="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-200">
+        <div class="w-16 h-16 bg-stone-100 rounded-lg flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-stone-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg sm:text-xl font-semibold text-stone-800 mb-3">Результаты, которые видны</h3>
+        <p class="text-gray-600 text-sm sm:text-base">Через месяц вы почувствуете значительное улучшение произношения и уверенности в разговоре.</p>
+      </div>
+      
+      <!-- Benefit 2 -->
+      <div class="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-200">
+        <div class="w-16 h-16 bg-stone-100 rounded-lg flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-stone-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg sm:text-xl font-semibold text-stone-800 mb-3">Без страха и зубрёжки</h3>
+        <p class="text-gray-600 text-sm sm:text-base">Я превращаю грамматику в увлекательную игру, а английский — в естественную часть жизни.</p>
+      </div>
+      
+      <!-- Benefit 3 -->
+      <div class="bg-white p-6 sm:p-8 rounded-xl shadow-sm border border-gray-200">
+        <div class="w-16 h-16 bg-stone-100 rounded-lg flex items-center justify-center mb-6">
+          <svg class="w-8 h-8 text-stone-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+        </div>
+        <h3 class="text-lg sm:text-xl font-semibold text-stone-800 mb-3">Индивидуальный подход</h3>
+        <p class="text-gray-600 text-sm sm:text-base">Каждая программа адаптирована под ваши цели, уровень и темп обучения.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 3. ABOUT SECTION ==================== -->
+<section id="about" class="py-12 sm:py-16 md:py-20 px-4 bg-white">
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 text-center mb-4">
+      Обо мне
+    </h2>
+    <div class="max-w-3xl mx-auto mb-16">
+      <p class="text-gray-600 text-base sm:text-lg leading-relaxed mb-4">
+        Меня зовут Юля Велицкая. Английский — моя большая любовь с трёх лет, и я до сих пор не могу ею насытиться. Я окончила университет по специальности «Перевод и преподавание иностранных языков» и посвятила 15+ лет обучению своих студентов.
+      </p>
+      <p class="text-gray-600 text-base sm:text-lg leading-relaxed">
+        За эти годы я помогла сотням учеников преодолеть языковой барьер и начать говорить легко, уверенно и с удовольствием. Моя главная задача — сделать так, чтобы грамматика стала вашим другом, а не наказанием, а английский — естественной частью жизни.
+      </p>
+    </div>
+
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 text-center mb-4 mt-12">
+      Кому подойдут мои занятия
+    </h2>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- Card 1: Students -->
+      <div class="bg-slate-50 rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg transition">
+        <div class="h-32 sm:h-40 bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center">
+          <svg class="w-12 sm:w-16 h-12 sm:h-16 text-stone-600 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.5 6.253 2 10.998 2 17s4.5 10.747 10 10.747c5.5 0 10-4.998 10-10.747S17.5 6.253 12 6.253z"></path>
+          </svg>
+        </div>
+        <div class="p-6 sm:p-8">
+          <h3 class="text-lg sm:text-xl font-semibold text-stone-800 mb-4">Школьникам</h3>
+          <ul class="space-y-3 text-gray-600 text-sm sm:text-base">
+            <li class="flex items-start gap-3">
+              <span class="text-orange-400 font-bold flex-shrink-0">•</span>
+              <span>Закрываю пробелы в школьной программе</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-400 font-bold flex-shrink-0">•</span>
+              <span>Готовлю к багруту (модули 3, 4 и 5)</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-400 font-bold flex-shrink-0">•</span>
+              <span>Помогаю уверенно чувствовать себя на контрольных и экзаменах</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Card 2: Adults -->
+      <div class="bg-slate-50 rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg transition">
+        <div class="h-32 sm:h-40 bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center">
+          <svg class="w-12 sm:w-16 h-12 sm:h-16 text-stone-600 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4m0 0h-2m2 0h2M4 6v10m0 0h2m-2 0H4m14 0v-2m0 2v2m0 0h2m-2 0h-2"></path>
+          </svg>
+        </div>
+        <div class="p-6 sm:p-8">
+          <h3 class="text-lg sm:text-xl font-semibold text-stone-800 mb-4">Взрослым</h3>
+          <ul class="space-y-3 text-gray-600 text-sm sm:text-base">
+            <li class="flex items-start gap-3">
+              <span class="text-orange-400 font-bold flex-shrink-0">•</span>
+              <span>Снимаю страх говорить</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-400 font-bold flex-shrink-0">•</span>
+              <span>Развиваю разговорный английский для работы, собеседований, поездок и повседневной жизни</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-400 font-bold flex-shrink-0">•</span>
+              <span>Учу получать удовольствие от общения на английском</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Card 3: Freedom seekers -->
+      <div class="bg-slate-50 rounded-xl overflow-hidden border border-gray-200 hover:shadow-lg transition">
+        <div class="h-32 sm:h-40 bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center">
+          <svg class="w-12 sm:w-16 h-12 sm:h-16 text-stone-600 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+        <div class="p-6 sm:p-8">
+          <h3 class="text-lg sm:text-xl font-semibold text-stone-800 mb-4">Всем, кто хочет настоящей свободы</h3>
+          <ul class="space-y-3 text-gray-600 text-sm sm:text-base">
+            <li class="flex items-start gap-3">
+              <span class="text-orange-400 font-bold flex-shrink-0">•</span>
+              <span>Учу понимать живую речь, использовать идиомы</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-400 font-bold flex-shrink-0">•</span>
+              <span>Развиваю естественное общение и юмор на английском</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="text-orange-400 font-bold flex-shrink-0">•</span>
+              <span>Готовлю к жизни и переезду за границу без зубрёжки и шаблонов</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 4. HOW LESSONS WORK ==================== -->
+<section class="py-12 sm:py-16 md:py-20 px-4 bg-slate-50">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 text-center mb-4">
+      Как проходят занятия
+    </h2>
+    <p class="text-center text-gray-600 text-base sm:text-lg mb-12 sm:mb-16">
+      Каждый урок спланирован, чтобы максимизировать ваш прогресс
+    </p>
+    
+    <div class="space-y-4 sm:space-y-6">
+      <!-- Step 1 -->
+      <div class="flex gap-4 sm:gap-6 items-start bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
+        <div class="w-10 h-10 bg-stone-800 text-white rounded-full flex items-center justify-center font-semibold flex-shrink-0 text-sm sm:text-base">1</div>
+        <div>
+          <h3 class="text-base sm:text-lg font-semibold text-stone-800 mb-2">Ставим красивое произношение</h3>
+          <p class="text-gray-600 text-sm sm:text-base">Разбираем каждый звук, работаем над интонацией и ритмом речи — это основа уверенной коммуникации.</p>
+        </div>
+      </div>
+      
+      <!-- Step 2 -->
+      <div class="flex gap-4 sm:gap-6 items-start bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
+        <div class="w-10 h-10 bg-stone-800 text-white rounded-full flex items-center justify-center font-semibold flex-shrink-0 text-sm sm:text-base">2</div>
+        <div>
+          <h3 class="text-base sm:text-lg font-semibold text-stone-800 mb-2">Убираем страх ошибиться</h3>
+          <p class="text-gray-600 text-sm sm:text-base">Создаю атмосферу, где ошибки — это просто часть процесса обучения, и вы говорите с удовольствием.</p>
+        </div>
+      </div>
+      
+      <!-- Step 3 -->
+      <div class="flex gap-4 sm:gap-6 items-start bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
+        <div class="w-10 h-10 bg-stone-800 text-white rounded-full flex items-center justify-center font-semibold flex-shrink-0 text-sm sm:text-base">3</div>
+        <div>
+          <h3 class="text-base sm:text-lg font-semibold text-stone-800 mb-2">Развиваем все навыки</h3>
+          <p class="text-gray-600 text-sm sm:text-base">Разговор, аудирование, чтение и письмо — развиваем всё комплексно, не зацикливаясь на одном.</p>
+        </div>
+      </div>
+      
+      <!-- Step 4 -->
+      <div class="flex gap-4 sm:gap-6 items-start bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
+        <div class="w-10 h-10 bg-stone-800 text-white rounded-full flex items-center justify-center font-semibold flex-shrink-0 text-sm sm:text-base">4</div>
+        <div>
+          <h3 class="text-base sm:text-lg font-semibold text-stone-800 mb-2">Закрываем пробелы и нарабатываем лексику</h3>
+          <p class="text-gray-600 text-sm sm:text-base">Выявляем проблемные области и быстро работаем над нужной вам лексикой в контексте.</p>
+        </div>
+      </div>
+      
+      <!-- Step 5 -->
+      <div class="flex gap-4 sm:gap-6 items-start bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
+        <div class="w-10 h-10 bg-stone-800 text-white rounded-full flex items-center justify-center font-semibold flex-shrink-0 text-sm sm:text-base">5</div>
+        <div>
+          <h3 class="text-base sm:text-lg font-semibold text-stone-800 mb-2">Работаем с интересными материалами</h3>
+          <p class="text-gray-600 text-sm sm:text-base">Используем современные, живые материалы вместо скучных учебников — темы, которые вам интересны.</p>
+        </div>
+      </div>
+      
+      <!-- Step 6 -->
+      <div class="flex gap-4 sm:gap-6 items-start bg-white p-4 sm:p-6 rounded-lg border border-gray-200">
+        <div class="w-10 h-10 bg-stone-800 text-white rounded-full flex items-center justify-center font-semibold flex-shrink-0 text-sm sm:text-base">6</div>
+        <div>
+          <h3 class="text-base sm:text-lg font-semibold text-stone-800 mb-2">Индивидуальный темп и программа</h3>
+          <p class="text-gray-600 text-sm sm:text-base">Программа адаптирована под ваши цели: от нуля до Proficiency, подготовка к экзаменам, работе или переезду.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 5. TESTIMONIALS ==================== -->
+<section class="py-12 sm:py-16 md:py-20 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 text-center mb-4">
+      Что говорят мои ученики
+    </h2>
+    <p class="text-center text-gray-600 text-base sm:text-lg mb-12 sm:mb-16">
+      Реальные отзывы людей, которые достигли свои цели
+    </p>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+      <!-- Testimonial 1 -->
+      <div class="testimonial-card bg-white p-6 sm:p-8 rounded-lg">
+        <div class="flex gap-1 mb-4">
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+        </div>
+        <p class="text-gray-700 mb-6 italic text-sm sm:text-base">
+          "Я боялась говорить по-английски, но Юля создала атмосферу, где ошибки — это просто часть процесса. За три месяца я прошла собеседование на английском и получила работу!"
+        </p>
+        <div>
+          <strong class="text-stone-800 text-sm sm:text-base">Мария С.</strong>
+          <p class="text-xs sm:text-sm text-gray-500">28 лет, подготовка к собеседованию</p>
+        </div>
+      </div>
+      
+      <!-- Testimonial 2 -->
+      <div class="testimonial-card bg-white p-6 sm:p-8 rounded-lg">
+        <div class="flex gap-1 mb-4">
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+        </div>
+        <p class="text-gray-700 mb-6 italic text-sm sm:text-base">
+          "Мой сын подготовился к багруту за полгода. Он прошёл с оценкой 85! Юля делает занятия интересными, и он с удовольствием готовился к каждому уроку."
+        </p>
+        <div>
+          <strong class="text-stone-800 text-sm sm:text-base">Анна З.</strong>
+          <p class="text-xs sm:text-sm text-gray-500">Мама ученика, подготовка к багруту</p>
+        </div>
+      </div>
+      
+      <!-- Testimonial 3 -->
+      <div class="testimonial-card bg-white p-6 sm:p-8 rounded-lg">
+        <div class="flex gap-1 mb-4">
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+        </div>
+        <p class="text-gray-700 mb-6 italic text-sm sm:text-base">
+          "Я поехал в Лондон и смог спокойно говорить с местными, заказывать в ресторанах, общаться на экскурсиях. Спасибо за то, что научили живому английскому!"
+        </p>
+        <div>
+          <strong class="text-stone-800 text-sm sm:text-base">Дмитрий Л.</strong>
+          <p class="text-xs sm:text-sm text-gray-500">35 лет, разговорный английский</p>
+        </div>
+      </div>
+      
+      <!-- Testimonial 4 -->
+      <div class="testimonial-card bg-white p-6 sm:p-8 rounded-lg">
+        <div class="flex gap-1 mb-4">
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+          <span class="text-orange-400 text-sm sm:text-base">★</span>
+        </div>
+        <p class="text-gray-700 mb-6 italic text-sm sm:text-base">
+          "У меня было A1, я не знала даже базовых фраз. За год я дошла до B1 и теперь смотрю английские фильмы без субтитров. Невероятно!"
+        </p>
+        <div>
+          <strong class="text-stone-800 text-sm sm:text-base">Елена К.</strong>
+          <p class="text-xs sm:text-sm text-gray-500">42 года, развитие с нуля</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 6. PRICING ==================== -->
+<section class="py-12 sm:py-16 md:py-20 px-4 bg-slate-50">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 text-center mb-4">
+      Форматы и расценки
+    </h2>
+    <p class="text-center text-gray-600 text-base sm:text-lg mb-12 sm:mb-16">
+      Выберите вариант, который подходит вам лучше всего
+    </p>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <!-- Option 1: Trial -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sm:p-8">
+        <h3 class="text-lg sm:text-2xl font-semibold text-stone-800 mb-2">Пробный урок</h3>
+        <div class="mb-6">
+          <span class="text-3xl sm:text-4xl font-bold text-stone-800">Бесплатно</span>
+        </div>
+        <ul class="space-y-3 mb-8 text-gray-600 text-sm sm:text-base">
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold flex-shrink-0">✓</span>
+            <span>60 минут</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold flex-shrink-0">✓</span>
+            <span>Диагностика уровня</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold flex-shrink-0">✓</span>
+            <span>Персональный план</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold flex-shrink-0">✓</span>
+            <span>Без обязательств</span>
+          </li>
+        </ul>
+        <a href="https://wa.me/972533218905?text=Привет%2C%20Юля!%20Хочу%20записаться%20на%20пробный%20урок." target="_blank" rel="noopener" class="btn-whatsapp justify-center w-full">
+          Записаться
+        </a>
+      </div>
+      
+      <!-- Option 2: Individual -->
+      <div class="bg-stone-800 text-white rounded-xl shadow-lg p-6 sm:p-8 border-2 border-orange-400 relative">
+        <div class="absolute top-0 right-0 bg-orange-400 text-stone-800 px-3 sm:px-4 py-2 rounded-bl-lg font-semibold text-xs sm:text-sm">
+          Популярный
+        </div>
+        <h3 class="text-lg sm:text-2xl font-semibold mb-2 mt-4">Индивидуальные</h3>
+        <div class="mb-6">
+          <span class="text-3xl sm:text-4xl font-bold">260₪</span>
+          <span class="text-gray-300 text-base sm:text-lg">/60 мин</span>
+        </div>
+        <ul class="space-y-3 mb-8 text-gray-100 text-sm sm:text-base">
+          <li class="flex items-start gap-2">
+            <span class="text-orange-300 font-bold flex-shrink-0">✓</span>
+            <span>60 минут один-на-один</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-300 font-bold flex-shrink-0">✓</span>
+            <span>Гибкое расписание</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-300 font-bold flex-shrink-0">✓</span>
+            <span>Очно или онлайн</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-300 font-bold flex-shrink-0">✓</span>
+            <span>Материалы и домашка</span>
+          </li>
+        </ul>
+        <a href="https://wa.me/972533218905?text=Привет%2C%20Юля!%20Интересует%20индивидуальный%20урок." target="_blank" rel="noopener" class="w-full px-4 sm:px-6 py-4 sm:py-3 bg-orange-400 text-stone-800 rounded-lg font-semibold hover:bg-orange-300 transition flex items-center justify-center gap-2 text-sm sm:text-base">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.413-2.393-1.476-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.255.949 9.83 9.83 0 00-3.12 2.51A9.83 9.83 0 002.5 12c0 5.467 4.471 9.922 9.896 9.922 1.54 0 3.006-.28 4.38-.823l.031-.015c5.385-2.117 8.979-7.534 8.979-13.084 0-5.467-4.471-9.922-9.896-9.922z"/></svg>
+          Написать
+        </a>
+      </div>
+      
+      <!-- Option 3: Package -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 sm:p-8">
+        <h3 class="text-lg sm:text-2xl font-semibold text-stone-800 mb-2">Пакет (4 урока)</h3>
+        <div class="mb-6">
+          <span class="text-3xl sm:text-4xl font-bold text-stone-800">950₪</span>
+          <span class="text-gray-500 text-base sm:text-lg">/месяц</span>
+          <p class="text-xs sm:text-sm text-green-600 font-semibold mt-2">Экономия 10% за пакет</p>
+        </div>
+        <ul class="space-y-3 mb-8 text-gray-600 text-sm sm:text-base">
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold flex-shrink-0">✓</span>
+            <span>4 урока в месяц</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold flex-shrink-0">✓</span>
+            <span>Фиксированное расписание</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold flex-shrink-0">✓</span>
+            <span>Лучшие результаты</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-orange-400 font-bold flex-shrink-0">✓</span>
+            <span>Поддержка между уроками</span>
+          </li>
+        </ul>
+        <a href="https://wa.me/972533218905?text=Привет%2C%20Юля!%20Хочу%20пакет%20уроков." target="_blank" rel="noopener" class="btn-whatsapp justify-center w-full">
+          Начать пакет
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 7. FAQ ==================== -->
+<section class="py-12 sm:py-16 md:py-20 px-4">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-stone-800 text-center mb-4">
+      Часто задаваемые вопросы
+    </h2>
+    <p class="text-center text-gray-600 text-base sm:text-lg mb-12 sm:mb-16">
+      Ответы на всё, что вас волнует
+    </p>
+    
+    <div class="space-y-4 sm:space-y-6">
+      <!-- FAQ 1 -->
+      <details class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 group">
+        <summary class="flex items-center gap-4 cursor-pointer font-semibold text-stone-800 text-base sm:text-lg">
+          <svg class="w-5 h-5 text-orange-400 flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <span>Сколько нужно времени, чтобы начать говорить?</span>
+        </summary>
+        <p class="text-gray-600 mt-4 pl-10 text-sm sm:text-base">
+          Обычно студенты заметно улучшают произношение и уверенность в разговоре уже в течение первого месяца. Через 3-6 месяцев регулярных занятий люди достигают значительного прогресса и могут вести уверенные разговоры на интересующие их темы.
+        </p>
+      </details>
+      
+      <!-- FAQ 2 -->
+      <details class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 group">
+        <summary class="flex items-center gap-4 cursor-pointer font-semibold text-stone-800 text-base sm:text-lg">
+          <svg class="w-5 h-5 text-orange-400 flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <span>Занятия проходят онлайн или очно?</span>
+        </summary>
+        <p class="text-gray-600 mt-4 pl-10 text-sm sm:text-base">
+          Оба варианта! Вы можете выбрать очные занятия в Тель-Авиве или онлайн-уроки через Zoom. Многие студенты комбинируют оба формата в зависимости от своего расписания.
+        </p>
+      </details>
+      
+      <!-- FAQ 3 -->
+      <details class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 group">
+        <summary class="flex items-center gap-4 cursor-pointer font-semibold text-stone-800 text-base sm:text-lg">
+          <svg class="w-5 h-5 text-orange-400 flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <span>Какой минимальный уровень, чтобы начать?</span>
+        </summary>
+        <p class="text-gray-600 mt-4 pl-10 text-sm sm:text-base">
+          Никакого! Я работаю со всеми уровнями, от полного нуля (A0) до продвинутого (C2). На первом уроке мы проведём диагностику и создадим план, соответствующий именно вашему уровню.
+        </p>
+      </details>
+      
+      <!-- FAQ 4 -->
+      <details class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 group">
+        <summary class="flex items-center gap-4 cursor-pointer font-semibold text-stone-800 text-base sm:text-lg">
+          <svg class="w-5 h-5 text-orange-400 flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <span>Есть ли пробный урок?</span>
+        </summary>
+        <p class="text-gray-600 mt-4 pl-10 text-sm sm:text-base">
+          Да, первый урок полностью бесплатен! Это 60 минут, во время которых я определю ваш уровень, выявлю пробелы и создам персональный план развития. Никаких обязательств.
+        </p>
+      </details>
+      
+      <!-- FAQ 5 -->
+      <details class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 group">
+        <summary class="flex items-center gap-4 cursor-pointer font-semibold text-stone-800 text-base sm:text-lg">
+          <svg class="w-5 h-5 text-orange-400 flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <span>Что если я начал, но захотел отменить?</span>
+        </summary>
+        <p class="text-gray-600 mt-4 pl-10 text-sm sm:text-base">
+          Нет проблем. Если вы записались на пакет и захотели остановиться, вы можете это сделать в любой момент. Я честно отношусь к своим студентам — нет скрытых условий.
+        </p>
+      </details>
+      
+      <!-- FAQ 6 -->
+      <details class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6 group">
+        <summary class="flex items-center gap-4 cursor-pointer font-semibold text-stone-800 text-base sm:text-lg">
+          <svg class="w-5 h-5 text-orange-400 flex-shrink-0 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <span>Готовите ли вы к международным экзаменам?</span>
+        </summary>
+        <p class="text-gray-600 mt-4 pl-10 text-sm sm:text-base">
+          Да! Я готовлю студентов к TOEFL, IELTS, Cambridge экзаменам и, конечно, к израильскому багруту. Каждый курс подготовки разработан специально под формат экзамена.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 8. FINAL CTA ==================== -->
+<section class="py-16 sm:py-20 md:py-24 px-4 hero-bg text-white">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+      Готовы заговорить по-английски уверенно?
+    </h2>
+    <p class="text-base sm:text-lg md:text-xl text-gray-200 mb-8 sm:mb-12">
+      Первый шаг — это один простой клик. Напишите мне, и мы договоримся о времени для бесплатного пробного урока.
+    </p>
+    
+    <!-- Problem options (мобильный friendly) -->
+    <p class="text-base sm:text-lg text-gray-300 mb-6 sm:mb-8">
+      Расскажите, с чем у вас основная сложность:
+    </p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 mb-8">
+      <a href="https://wa.me/972533218905?text=Привет%2C%20Юля!%20У%20меня%20проблемы%20с%20произношением." target="_blank" rel="noopener" class="flex items-center justify-center px-3 sm:px-4 py-3 sm:py-4 bg-orange-400 text-stone-800 rounded-lg font-semibold hover:bg-orange-300 transition text-xs sm:text-sm text-center leading-snug">
+        Произношение
+      </a>
+      <a href="https://wa.me/972533218905?text=Привет%2C%20Юля!%20Я%20боюсь%20говорить%20по-английски." target="_blank" rel="noopener" class="flex items-center justify-center px-3 sm:px-4 py-3 sm:py-4 bg-orange-400 text-stone-800 rounded-lg font-semibold hover:bg-orange-300 transition text-xs sm:text-sm text-center leading-snug">
+        Страх говорить
+      </a>
+      <a href="https://wa.me/972533218905?text=Привет%2C%20Юля!%20Мне%20нужна%20подготовка%20к%20экзамену%20или%20собеседованию." target="_blank" rel="noopener" class="flex items-center justify-center px-3 sm:px-4 py-3 sm:py-4 bg-orange-400 text-stone-800 rounded-lg font-semibold hover:bg-orange-300 transition text-xs sm:text-sm text-center leading-snug">
+        Экзамен
+      </a>
+      <a href="https://wa.me/972533218905?text=Привет%2C%20Юля!%20Мне%20нужна%20помощь%20со%20школьной%20программой%20и%20подготовкой%20к%20багруту." target="_blank" rel="noopener" class="flex items-center justify-center px-3 sm:px-4 py-3 sm:py-4 bg-orange-400 text-stone-800 rounded-lg font-semibold hover:bg-orange-300 transition text-xs sm:text-sm text-center leading-snug">
+        Багрут
+      </a>
+    </div>
+
+    <!-- Alternative contact -->
+    <p class="text-gray-300 text-xs sm:text-sm">
+      Или напишите напрямую: <strong class="text-white">053-321-8905 в WhatsApp</strong>
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-stone-950 text-gray-400 py-8 sm:py-12 px-4">
+  <div class="max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-8">
+      <div>
+        <h4 class="text-white font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Юля Велицкая</h4>
+        <p class="text-xs sm:text-sm">Преподаватель английского языка<br>Тель-Авив, Израиль</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Контакты</h4>
+        <p class="text-xs sm:text-sm">
+          WhatsApp: <a href="https://wa.me/972533218905" class="text-orange-400 hover:underline">053-321-8905</a><br>
+          Email: <a href="mailto:yulia@english.com" class="text-orange-400 hover:underline">yulia@english.com</a>
+        </p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3 sm:mb-4 text-base sm:text-lg">Соцсети</h4>
+        <div class="flex gap-4 flex-wrap">
+          <a href="#" class="text-orange-400 hover:text-orange-300 text-xs sm:text-sm">Instagram</a>
+          <a href="#" class="text-orange-400 hover:text-orange-300 text-xs sm:text-sm">Facebook</a>
+          <a href="#" class="text-orange-400 hover:text-orange-300 text-xs sm:text-sm">Telegram</a>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-stone-700 pt-8">
+      <p class="text-center text-xs sm:text-sm">&copy; 2024 Юля Велицкая. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function handleFormSubmit(event) {
+  event.preventDefault();
+  const form = event.target;
+  const name = form.querySelector('input[type="text"]').value;
+  const goal = form.querySelector('select').value;
+  const phone = form.querySelector('input[type="tel"]').value;
+  
+  const message = `Привет, Юля! Меня зовут ${name}. Меня интересует ${goal}. Мой номер: ${phone}`;
+  const whatsappUrl = `https://wa.me/972533218905?text=${encodeURIComponent(message)}`;
+  
+  window.open(whatsappUrl, '_blank');
+}
+</script>
+
+</body>
+</html>
